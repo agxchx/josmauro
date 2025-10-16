@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About - Jos Mauro Witteveen</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #000000; 
+      color: #ffffff;
+      font-family: "Avenir", sans-serif;
+    }
+
+    /* --- ESTILOS DEL HEADER (Idénticos a la página principal) --- */
+    .header {
+      position: relative;
+      height: 64px;
+      background: rgb(39, 8, 3);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      border-bottom: 1px solid #444;
+      z-index: 10;
+    }
+
+    .nav-left a {
+      margin: 0 10px;
+      padding: 10px 0;
+      text-decoration: none;
+      color: #ffffff;
+      transition: color 0.3s;
+      font-size: 0.7em;
+    }
+    .nav-left a:hover {
+      color: #ccc;
+      text-decoration: underline;
+    }
+    
+    .header-title {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.2em; 
+      font-weight: normal;
+      color: #ffffff;
+    }
+    
+    .social-logos {
+      display: flex;
+      align-items: center;
+    }
+    
+    .social-logos > *:not(:last-child) {
+        margin-right: 30px; 
+    }
+
+    .social-logos .nav-button-right {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.7em;
+      transition: color 0.3s;
+    }
+    .social-logos .nav-button-right:hover {
+      color: #ccc;
+      text-decoration: underline;
+    }
+
+    .social-logos img {
+        height: 28px;
+        width: auto;
+    }
+    
+    /* Ocultamos los logos duplicados en la versión de escritorio */
+    .nav-left .social-logos {
+        display: none;
+    }
+
+    /* --- ESTILOS DEL CUERPO (MAIN CONTAINER) --- */
+    .big-container {
+      padding: 50px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .text-content {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .text-block .text-title {
+      font-size: 1.4em;
+      color: #ffffff;
+      margin-bottom: 15px;
+      font-weight: normal; 
+    }
+
+    .text-block p {
+      font-size: 1em;
+      line-height: 1.7;
+      color: #b0b0b0;
+      margin: 0 0 1em 0;
+    }
+    
+    /* --- ESTILOS RESPONSIVE PARA MÓVILES (ACTUALIZADOS) --- */
+    .menu-toggle { display: none; }
+    .bar {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background-color: #fff;
+      margin: 5px auto;
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        justify-content: center;
+      }
+      .header-title {
+        position: static;
+        transform: none;
+        font-size: 1em; 
+      }
+      .header > .social-logos {
+          display: none;
+      }
+      .nav-left {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 80%;
+        height: 100%;
+        background-color: rgb(39, 8, 3);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+      }
+      .nav-left.active {
+        transform: translateX(0);
+      }
+      .nav-left a { 
+        margin: 20px 0;
+        font-size: 1.2em;
+      }
+      .nav-left .social-logos {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-top: 30px;
+          padding-top: 30px;
+          border-top: 1px solid #444;
+          width: 100%;
+      }
+      .nav-left .social-logos > * {
+          margin: 10px 0;
+      }
+      .nav-left .social-logos > *:not(:last-child) {
+          margin-right: 0;
+      }
+      .menu-toggle {
+        display: block;
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        cursor: pointer;
+        z-index: 1001;
+      }
+      .big-container {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="menu-toggle" onclick="toggleMenu()">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+
+    <nav class="nav-left">
+      <a href="index.html">Cinematography</a>
+      <a href="about.html">About</a>
+      
+      <div class="social-logos">
+        <a href="contact.html" class="nav-button-right">Contact</a> 
+        <a href="https://www.linkedin.com/in/jos-mauro-witteveen-villag%C3%B3mez-b6076b21a/" target="_blank" rel="noopener noreferrer">
+          <img src="MEDIA/linkedin-logo.png" alt="linkedin">
+        </a>
+        <a href="https://www.instagram.com/josmaurow/" target="_blank" rel="noopener noreferrer">
+          <img src="MEDIA/instlogo.png" alt="insta">
+        </a>
+      </div>
+    </nav>
+
+    <div class="header-title">
+      JOS MAURO WITTEVEEN
+    </div>
+    
+    <div class="social-logos">
+        <a href="contact.html" class="nav-button-right">Contact</a> 
+        <a href="https://www.linkedin.com/in/jos-mauro-witteveen-villag%C3%B3mez-b6076b21a/" target="_blank" rel="noopener noreferrer">
+          <img src="MEDIA/linkedin-logo.png" alt="linkedin">
+        </a>
+        <a href="https://www.instagram.com/josmaurow/" target="_blank" rel="noopener noreferrer">
+          <img src="MEDIA/instlogo.png" alt="insta">
+        </a>
+    </div>    
+  </header>
+
+  <main class="big-container">
+    <div class="text-content">
+      
+      <div class="text-block">
+        <h2 class="text-title"></h2>
+        <p>
+          I am an Ecuadorian-Dutch filmmaker and storyteller. My path began in a theater collective in Quito, where I first discovered a love for dramaturgy that later grew into a passion for cinema. After graduating in Audiovisual Media at the University of the Arts Utrecht in 2022 with my short film Ventanas Abiertas, I continue to explore the spaces where fiction and non-fiction meet.
+        </p>
+        <p>
+          My work often follows outsiders whose lives reflect our shared humanity and existential experience. I am drawn to magical realism and social realism, both very much rooted in the continent where I grew up, South America. Whether inspired by life or imagination, I seek stories that reveal truth in subtle, day-to-day ways.
+        </p>
+        <p>
+        I am now also delving into more commercial aspects of audiovisual work where artistic is of course, always present. If you’d like to collaborate, brainstorm or just have a drink send me an email.
+        </p>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    // Solo queda la función para el menú
+    function toggleMenu() {
+      const navButtons = document.querySelector('.nav-left');
+      navButtons.classList.toggle('active');
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jos Mauro Witteveen</title>
+  <style>
+    /* ========= INICIO DE ESTILOS PARA EL VIDEO DE FONDO ========= */
+    .video-background-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -2;
+      overflow: hidden;
+      pointer-events: none; /* Añadido para mejorar compatibilidad móvil */
+    }
+
+    #background-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video-background-container::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      z-index: -1;
+    }
+    /* ========= FIN DE ESTILOS PARA EL VIDEO DE FONDO ========= */
+
+    body {
+      margin: 0;
+      background-color: transparent; 
+      color: #ffffff;
+      font-family: "Avenir", sans-serif;
+    }
+
+    /* --- 1. ESTILOS DEL HEADER MODIFICADO --- */
+    .header {
+      position: relative;
+      height: 64px;
+      background: rgb(39, 8, 3);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      border-bottom: 1px solid #444;
+      z-index: 10;
+    }
+
+    .nav-left a {
+      margin: 0 10px;
+      padding: 10px 0;
+      text-decoration: none;
+      color: #ffffff;
+      transition: color 0.3s;
+      font-size: 0.7em;
+    }
+    .nav-left a:hover {
+      color: #ccc;
+      text-decoration: underline;
+    }
+    
+    .header-title {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.2em; 
+      font-weight: normal;
+      color: #ffffff;
+    }
+    
+    .social-logos {
+      display: flex;
+      align-items: center;
+    }
+    
+    .social-logos > *:not(:last-child) {
+        margin-right: 30px; 
+    }
+
+    .social-logos .nav-button-right {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.7em;
+      transition: color 0.3s;
+    }
+    .social-logos .nav-button-right:hover {
+      color: #ccc;
+      text-decoration: underline;
+    }
+
+    .social-logos img {
+        height: 28px;
+        width: auto;
+    }
+    
+    .nav-left .social-logos {
+        display: none;
+    }
+
+    /* --- 2. ESTILOS DEL CUERPO (MAIN CONTAINER) --- */
+    .big-container {
+      padding: 50px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .projects-container {
+        display: flex;
+        flex-direction: column;
+        gap: 100px;
+    }
+
+   /* --- 3. ESTILOS PARA CADA ITEM DE PROYECTO (IMAGEN CENTRADA) --- */
+   .project-item {
+        position: relative;
+        min-height: 350px;
+        margin-bottom: 60px;
+    }
+
+    .project-media {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50%;
+        max-width: 700px;
+        align-items: center;
+    }
+
+    .project-media img {
+        width: 100%;
+        height: auto;
+        display: block;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+        background-color: #1a1a1a;
+    }
+
+    .project-info {
+        width: 35%;
+        margin-left: calc(50% + 25% + 30px);
+        padding-top: 10px;
+    }
+
+    .project-title {
+        font-size: 1.4em;
+        font-weight: bold;
+        margin: 0 0 5px 0;
+    }
+
+    .project-year {
+        font-size: 1em;
+        color: #918e8e;
+        margin: 0 0 15px 0;
+    }
+
+    .project-description {
+        font-size: 0.95em;
+        line-height: 1.5;
+        color: #b0b0b0;
+    }
+    
+   /* --- ESTILOS RESPONSIVE PARA MÓVILES --- */
+    .menu-toggle { display: none; }
+    .bar {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background-color: #fff;
+      margin: 5px auto;
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        justify-content: center;
+      }
+      
+      .header-title {
+        position: static;
+        transform: none;
+        font-size: 1em; 
+      }
+
+      .header > .social-logos {
+          display: none;
+      }
+      
+      .nav-left {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 80%;
+        height: 100%;
+        background-color: rgb(39, 8, 3);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+      }
+      .nav-left.active {
+        transform: translateX(0);
+      }
+      .nav-left a { 
+        margin: 20px 0;
+        font-size: 1.2em;
+      }
+      
+      .nav-left .social-logos {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-top: 30px;
+          padding-top: 30px;
+          border-top: 1px solid #444;
+          width: 100%;
+      }
+      .nav-left .social-logos > * {
+          margin: 10px 0;
+      }
+      .nav-left .social-logos > *:not(:last-child) {
+          margin-right: 0;
+      }
+      
+      .menu-toggle {
+        display: block;
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        cursor: pointer;
+        z-index: 1001;
+      }
+
+      .big-container {
+        padding: 30px 20px;
+      }
+
+      /* ===== CORRECCIÓN PARA CENTRADO Y ESPACIADO EN MÓVIL ===== */
+      .project-item {
+          position: static; /* Reseteamos la posición */
+          min-height: auto;
+          margin-bottom: 50px;
+      }
+
+      .project-media {
+          position: static; /* Reseteamos la posición */
+          transform: none;   /* Reseteamos la transformación */
+          width: 100%;     /* Ocupa todo el ancho disponible */
+          margin: 0 auto 20px auto; /* Centrado y con margen inferior */
+      }
+
+      .project-info {
+          width: 100%;      /* Ocupa todo el ancho disponible */
+          margin-left: 0;   /* Reseteamos el margen */
+          padding-top: 0;
+          text-align: center; /* Centramos el texto */
+      }
+      /* ===== FIN DE LA CORRECCIÓN ===== */
+    }
+  </style>
+</head>
+<body>
+
+  <div class="video-background-container">
+    <video playsinline autoplay muted loop id="background-video">
+      <source src="MEDIA/VIDEO.mp4" type="video/mp4">
+    </video>
+  </div>
+  <header class="header">
+    <div class="menu-toggle" onclick="toggleMenu()">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+
+    <nav class="nav-left">
+      <a href="index.html">Cinematography</a>
+      <a href="/About/index.html">About</a>
+      
+      <div class="social-logos">
+        <a href="Contact/index.html" class="nav-button-right">Contact</a> 
+        <a href="https://www.linkedin.com/in/jos-mauro-witteveen-villag%C3%B3mez-b6076b21a/" target="_blank" rel="noopener noreferrer">
+          <img src="MEDIA/linkedin-logo.png" alt="linkedin">
+        </a>
+        <a href="https://www.instagram.com/josmaurow/" target="_blank" rel="noopener noreferrer">
+          <img src="MEDIA/instlogo.png" alt="insta">
+        </a>
+      </div>
+    </nav>
+
+    <div class="header-title">
+      JOS MAURO WITTEVEEN
+    </div>
+    
+    <div class="social-logos">
+        <a href="Contact/index.html" class="nav-button-right">Contact</a> 
+        <a href="https://www.linkedin.com/in/jos-mauro-witteveen-villag%C3%B3mez-b6076b21a/" target="_blank" rel="noopener noreferrer">
+          <img src="MEDIA/linkedin-logo.png" alt="linkedin">
+        </a>
+        <a href="https://www.instagram.com/josmaurow/" target="_blank" rel="noopener noreferrer">
+          <img src="MEDIA/instlogo.png" alt="insta">
+        </a>
+    </div>    
+  </header>
+
+  <main class="big-container">
+    <div class="projects-container">
+      
+      <div class="project-item">
+        <div class="project-media">
+          <img src="MEDIA/img1.png" alt="Visual del Proyecto 1">
+        </div>
+        <div class="project-info">
+          <div class="project-title">Wanklank/Crescendo</div>
+          <div class="project-year">2025</div>
+          <div class="project-description">
+              Short satire fiction. 10 minutes
+          </div>
+        </div>
+      </div>
+      
+      <div class="project-item">
+        <div class="project-media">
+          <img src="MEDIA/img2.png" alt="Visual del Proyecto 2">
+        </div>
+        <div class="project-info">
+          <div class="project-title">The way things are</div>
+          <div class="project-year">2024</div>
+          <div class="project-description">
+            Audiovisual Poem shot on super 8mm
+          </div>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <div class="project-media">
+          <img src="MEDIA/img3.png" alt="Visual del Proyecto 3">
+        </div>
+        <div class="project-info">
+          <div class="project-title">My Grandmother's Skirt</div>
+          <div class="project-year">2025</div>
+          <div class="project-description">
+            Short documentary. 21 minutes
+          </div>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <div class="project-media">
+          <img src="MEDIA/img4.png" alt="Visual del Proyecto 2">
+        </div>
+        <div class="project-info">
+          <div class="project-title">When Time Is Gone </div>
+          <div class="project-year">2023</div>
+          <div class="project-description">
+            Short documentary. 10 minutes
+          </div>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <div class="project-media">
+          <img src="MEDIA/img5.png" alt="Visual del Proyecto 2">
+        </div>
+        <div class="project-info">
+          <div class="project-title">Ventanas Abiertas  </div>
+          <div class="project-year">2022</div>
+          <div class="project-description">
+            Graduation short fiction. 26 minutes
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    function toggleMenu() {
+      const navButtons = document.querySelector('.nav-left');
+      navButtons.classList.toggle('active');
+    }
+  </script>
+
+</body>
+</html>
