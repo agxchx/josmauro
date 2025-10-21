@@ -4,8 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Jos Mauro Witteveen</title>
+  
+  <script src="https://player.vimeo.com/api/player.js"></script>
+  
   <style>
-    /* ========= INICIO DE ESTILOS PARA EL VIDEO DE FONDO ========= */
+    /* ... (Estilos de video de fondo y body sin cambios) ... */
     .video-background-container {
       position: fixed;
       top: 0;
@@ -14,15 +17,13 @@
       height: 100vh;
       z-index: -2;
       overflow: hidden;
-      pointer-events: none; /* Añadido para mejorar compatibilidad móvil */
+      pointer-events: none; 
     }
-
     #background-video {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
-
     .video-background-container::after {
       content: '';
       position: absolute;
@@ -33,8 +34,6 @@
       background-color: rgba(0, 0, 0, 0.9);
       z-index: -1;
     }
-    /* ========= FIN DE ESTILOS PARA EL VIDEO DE FONDO ========= */
-
     body {
       margin: 0;
       background-color: transparent; 
@@ -42,7 +41,7 @@
       font-family: "Avenir", sans-serif;
     }
 
-    /* --- 1. ESTILOS DEL HEADER MODIFICADO --- */
+    /* ... (Estilos de Header sin cambios) ... */
     .header {
       position: relative;
       height: 64px;
@@ -54,78 +53,30 @@
       border-bottom: 1px solid #444;
       z-index: 10;
     }
+    .nav-left a { margin: 0 10px; padding: 10px 0; text-decoration: none; color: #ffffff; transition: color 0.3s; font-size: 0.7em; }
+    .nav-left a:hover { color: #ccc; text-decoration: underline; }
+    .header-title { position: absolute; left: 50%; transform: translateX(-50%); font-size: 1.2em; font-weight: normal; color: #ffffff; }
+    .social-logos { display: flex; align-items: center; }
+    .social-logos > *:not(:last-child) { margin-right: 30px; }
+    .social-logos .nav-button-right { color: #ffffff; text-decoration: none; font-size: 0.7em; transition: color 0.3s; }
+    .social-logos .nav-button-right:hover { color: #ccc; text-decoration: underline; }
+    .social-logos img { height: 28px; width: auto; }
+    .nav-left .social-logos { display: none; }
 
-    .nav-left a {
-      margin: 0 10px;
-      padding: 10px 0;
-      text-decoration: none;
-      color: #ffffff;
-      transition: color 0.3s;
-      font-size: 0.7em;
-    }
-    .nav-left a:hover {
-      color: #ccc;
-      text-decoration: underline;
-    }
-    
-    .header-title {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 1.2em; 
-      font-weight: normal;
-      color: #ffffff;
-    }
-    
-    .social-logos {
-      display: flex;
-      align-items: center;
-    }
-    
-    .social-logos > *:not(:last-child) {
-        margin-right: 30px; 
-    }
+    /* ... (Estilos de Main Container sin cambios) ... */
+    .big-container { padding: 50px; max-width: 1200px; margin: 0 auto; }
+    .projects-container { display: flex; flex-direction: column; gap: 100px; }
 
-    .social-logos .nav-button-right {
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 0.7em;
-      transition: color 0.3s;
-    }
-    .social-logos .nav-button-right:hover {
-      color: #ccc;
-      text-decoration: underline;
-    }
-
-    .social-logos img {
-        height: 28px;
-        width: auto;
-    }
-    
-    .nav-left .social-logos {
-        display: none;
-    }
-
-    /* --- 2. ESTILOS DEL CUERPO (MAIN CONTAINER) --- */
-    .big-container {
-      padding: 50px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    
-    .projects-container {
-        display: flex;
-        flex-direction: column;
-        gap: 100px;
-    }
-
-   /* --- 3. ESTILOS PARA CADA ITEM DE PROYECTO (IMAGEN CENTRADA) --- */
-   .project-item {
+    /* --- 3. ESTILOS DE PROYECTO CORREGIDOS --- */
+    .project-item {
         position: relative;
         min-height: 350px;
         margin-bottom: 60px;
     }
 
+    /* .project-media AHORA SOLO CONTROLA POSICIÓN Y ANCHO.
+      YA NO TIENE 'aspect-ratio' NI 'overflow'.
+    */
     .project-media {
         position: absolute;
         left: 50%;
@@ -135,13 +86,28 @@
         align-items: center;
     }
 
-    .project-media img {
-        width: 100%;
-        height: auto;
-        display: block;
-        aspect-ratio: 16 / 9;
-        object-fit: cover;
+    /* NUEVO DIV 'video-wrapper'.
+      Este div SÍ controla la proporción (aspect-ratio).
+      Usamos el "padding-bottom trick" que usa Vimeo.
+      56.25% es el valor para 16:9 (9 / 16 * 100 = 56.25)
+    */
+    .video-wrapper {
+        position: relative;
+        padding-bottom: 56.25%; /* Default 16:9 */
+        height: 0;
+        overflow: hidden;
         background-color: #1a1a1a;
+    }
+    
+    /* El iframe ahora llena el .video-wrapper 
+    */
+    .video-wrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
     }
 
     .project-info {
@@ -149,123 +115,56 @@
         margin-left: calc(50% + 25% + 30px);
         padding-top: 10px;
     }
-
-    .project-title {
-        font-size: 1.4em;
-        font-weight: bold;
-        margin: 0 0 5px 0;
-    }
-
-    .project-year {
-        font-size: 1em;
-        color: #918e8e;
-        margin: 0 0 15px 0;
-    }
-
-    .project-description {
-        font-size: 0.95em;
-        line-height: 1.5;
-        color: #b0b0b0;
-    }
+    .project-title { font-size: 1.4em; font-weight: bold; margin: 0 0 5px 0; }
+    .project-year { font-size: 1em; color: #918e8e; margin: 0 0 15px 0; }
+    .project-description { font-size: 0.95em; line-height: 1.5; color: #b0b0b0; }
     
-   /* --- ESTILOS RESPONSIVE PARA MÓVILES --- */
+    /* ... (Estilos de menú hamburguesa sin cambios) ... */
     .menu-toggle { display: none; }
-    .bar {
-      display: block;
-      width: 25px;
-      height: 3px;
-      background-color: #fff;
-      margin: 5px auto;
-    }
+    .bar { display: block; width: 25px; height: 3px; background-color: #fff; margin: 5px auto; }
 
+    /* --- ESTILOS RESPONSIVE (MÓVIL) CORREGIDOS --- */
     @media (max-width: 768px) {
-      .header {
-        justify-content: center;
-      }
+      /* ... (header, nav-left, menu-toggle sin cambios) ... */
+      .header { justify-content: center; }
+      .header-title { position: static; transform: none; font-size: 1em; }
+      .header > .social-logos { display: none; }
+      .nav-left { position: fixed; top: 0; left: 0; width: 80%; height: 100%; background-color: rgb(39, 8, 3); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 1000; transform: translateX(-100%); transition: transform 0.3s ease-in-out; }
+      .nav-left.active { transform: translateX(0); }
+      .nav-left a { margin: 20px 0; font-size: 1.2em; }
+      .nav-left .social-logos { display: flex; flex-direction: column; align-items: center; margin-top: 30px; padding-top: 30px; border-top: 1px solid #444; width: 100%; }
+      .nav-left .social-logos > * { margin: 10px 0; }
+      .nav-left .social-logos > *:not(:last-child) { margin-right: 0; }
+      .menu-toggle { display: block; position: absolute; top: 20px; left: 20px; cursor: pointer; z-index: 1001; }
       
-      .header-title {
-        position: static;
-        transform: none;
-        font-size: 1em; 
-      }
+      .big-container { padding: 30px 20px; }
 
-      .header > .social-logos {
-          display: none;
-      }
-      
-      .nav-left {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 80%;
-        height: 100%;
-        background-color: rgb(39, 8, 3);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        z-index: 1000;
-        transform: translateX(-100%);
-        transition: transform 0.3s ease-in-out;
-      }
-      .nav-left.active {
-        transform: translateX(0);
-      }
-      .nav-left a { 
-        margin: 20px 0;
-        font-size: 1.2em;
-      }
-      
-      .nav-left .social-logos {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          margin-top: 30px;
-          padding-top: 30px;
-          border-top: 1px solid #444;
-          width: 100%;
-      }
-      .nav-left .social-logos > * {
-          margin: 10px 0;
-      }
-      .nav-left .social-logos > *:not(:last-child) {
-          margin-right: 0;
-      }
-      
-      .menu-toggle {
-        display: block;
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        cursor: pointer;
-        z-index: 1001;
-      }
-
-      .big-container {
-        padding: 30px 20px;
-      }
-
-      /* ===== CORRECCIÓN PARA CENTRADO Y ESPACIADO EN MÓVIL ===== */
       .project-item {
-          position: static; /* Reseteamos la posición */
+          position: static; 
           min-height: auto;
           margin-bottom: 50px;
       }
 
+      /* En móvil, .project-media vuelve a ser estático y 100% ancho.
+        Ya no necesita 'aspect-ratio' aquí.
+      */
       .project-media {
-          position: static; /* Reseteamos la posición */
-          transform: none;   /* Reseteamos la transformación */
-          width: 100%;     /* Ocupa todo el ancho disponible */
-          margin: 0 auto 20px auto; /* Centrado y con margen inferior */
+          position: static;
+          transform: none;   
+          width: 100%;     
+          margin: 0 auto 20px auto;
       }
+      
+      /* El .video-wrapper se encarga de la proporción 16:9 
+        automáticamente también en móvil.
+      */
 
       .project-info {
-          width: 100%;      /* Ocupa todo el ancho disponible */
-          margin-left: 0;   /* Reseteamos el margen */
+          width: 100%;      
+          margin-left: 0;   
           padding-top: 0;
-          text-align: center; /* Centramos el texto */
+          text-align: center; 
       }
-      /* ===== FIN DE LA CORRECCIÓN ===== */
     }
   </style>
 </head>
@@ -276,49 +175,47 @@
       <source src="MEDIA/VIDEO.mp4" type="video/mp4">
     </video>
   </div>
+  
   <header class="header">
     <div class="menu-toggle" onclick="toggleMenu()">
         <span class="bar"></span>
         <span class="bar"></span>
         <span class="bar"></span>
     </div>
-
     <nav class="nav-left">
       <a href="index.html">Filmography</a>
       <a href="About/index.html">About</a>
-      
       <div class="social-logos">
         <a href="Contact/index.html" class="nav-button-right">Contact</a> 
-        <a href="https://www.linkedin.com/in/jos-mauro-witteveen-villag%C3%B3mez-b6076b21a/" target="_blank" rel="noopener noreferrer">
-          <img src="MEDIA/linkedin-logo.png" alt="linkedin">
-        </a>
-        <a href="https://www.instagram.com/josmaurow/" target="_blank" rel="noopener noreferrer">
-          <img src="MEDIA/instlogo.png" alt="insta">
-        </a>
+        <a href="https://www.linkedin.com/in/jos-mauro-witteveen-villag%C3%B3mez-b6076b21a/" target="_blank" rel="noopener noreferrer"><img src="MEDIA/linkedin-logo.png" alt="linkedin"></a>
+        <a href="https://www.instagram.com/josmaurow/" target="_blank" rel="noopener noreferrer"><img src="MEDIA/instlogo.png" alt="insta"></a>
       </div>
     </nav>
-
     <div class="header-title">
       Jos Mauro Witteveen
     </div>
-    
     <div class="social-logos">
         <a href="Contact/index.html" class="nav-button-right">Contact</a> 
-        <a href="https://www.linkedin.com/in/jos-mauro-witteveen-villag%C3%B3mez-b6076b21a/" target="_blank" rel="noopener noreferrer">
-          <img src="MEDIA/linkedin-logo.png" alt="linkedin">
-        </a>
-        <a href="https://www.instagram.com/josmaurow/" target="_blank" rel="noopener noreferrer">
-          <img src="MEDIA/instlogo.png" alt="insta">
-        </a>
+        <a href="https://www.linkedin.com/in/jos-mauro-witteveen-villag%C3%B3mez-b6076b21a/" target="_blank" rel="noopener noreferrer"><img src="MEDIA/linkedin-logo.png" alt="linkedin"></a>
+        <a href="https://www.instagram.com/josmaurow/" target="_blank" rel="noopener noreferrer"><img src="MEDIA/instlogo.png" alt="insta"></a>
     </div>    
   </header>
+  
+  
 
   <main class="big-container">
     <div class="projects-container">
       
       <div class="project-item">
         <div class="project-media">
-          <img src="MEDIA/img1.png" alt="Visual del Proyecto 1">
+          <div class="video-wrapper" style="padding-bottom: 41.82%;">
+            <iframe 
+              class="vimeo-player"
+              src="https://player.vimeo.com/video/1056356413?h=0f59a352e1&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+              allowfullscreen>
+            </iframe>
+          </div>
         </div>
         <div class="project-info">
           <div class="project-title">Wanklank/Crescendo</div>
@@ -328,10 +225,16 @@
           </div>
         </div>
       </div>
-      
       <div class="project-item">
         <div class="project-media">
-          <img src="MEDIA/img2.png" alt="Visual del Proyecto 2">
+          <div class="video-wrapper">
+            <iframe 
+              class="vimeo-player"
+              src="https://player.vimeo.com/video/1048333163?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0"" 
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+              allowfullscreen>
+            </iframe>
+          </div>
         </div>
         <div class="project-info">
           <div class="project-title">The way things are</div>
@@ -341,10 +244,16 @@
           </div>
         </div>
       </div>
-
       <div class="project-item">
         <div class="project-media">
-          <img src="MEDIA/img3.png" alt="Visual del Proyecto 3">
+          <div class="video-wrapper">
+             <iframe 
+              class="vimeo-player"
+              src="https://player.vimeo.com/video/1071160186?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+              allowfullscreen>
+            </iframe>
+          </div>
         </div>
         <div class="project-info">
           <div class="project-title">My Grandmother's Skirt</div>
@@ -354,10 +263,16 @@
           </div>
         </div>
       </div>
-
       <div class="project-item">
         <div class="project-media">
-          <img src="MEDIA/img4.png" alt="Visual del Proyecto 2">
+           <div class="video-wrapper">
+             <iframe 
+              class="vimeo-player"
+              src="https://player.vimeo.com/video/TUID4?h=ELHASH4" 
+              allow="autoplay; fullscreen; picture-in-picture" 
+              allowfullscreen>
+            </iframe>
+           </div>
         </div>
         <div class="project-info">
           <div class="project-title">When Time Is Gone </div>
@@ -370,7 +285,14 @@
 
       <div class="project-item">
         <div class="project-media">
-          <img src="MEDIA/img5.png" alt="Visual del Proyecto 2">
+           <div class="video-wrapper">
+             <iframe 
+              class="vimeo-player"
+              src="https://player.vimeo.com/video/1062191133?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" 
+              allow="autoplay; fullscreen; picture-in-picture" 
+              allowfullscreen>
+            </iframe>
+           </div>
         </div>
         <div class="project-info">
           <div class="project-title">Ventanas Abiertas  </div>
@@ -389,7 +311,55 @@
       const navButtons = document.querySelector('.nav-left');
       navButtons.classList.toggle('active');
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const backgroundVideo = document.getElementById('background-video');
+      
+      if (!backgroundVideo) {
+        console.error("No se encontró el video de fondo (#background-video).");
+        return;
+      }
+
+      const vimeoIframes = document.querySelectorAll('.vimeo-player');
+      let activeVimeoPlayers = 0;
+
+      function pauseBackgroundVideo() {
+        if (backgroundVideo && !backgroundVideo.paused) {
+          backgroundVideo.pause();
+        }
+      }
+
+      function resumeBackgroundVideo() {
+        if (activeVimeoPlayers === 0 && backgroundVideo && backgroundVideo.paused) {
+          backgroundVideo.play().catch(e => console.warn("El video de fondo no pudo reanudarse automáticamente:", e));
+        }
+      }
+
+      vimeoIframes.forEach(iframe => {
+        try {
+          const player = new Vimeo.Player(iframe);
+
+          player.on('play', function() {
+            pauseBackgroundVideo();
+            activeVimeoPlayers++; 
+          });
+
+          player.on('pause', function() {
+            activeVimeoPlayers--; 
+            resumeBackgroundVideo(); 
+          });
+
+          player.on('ended', function() {
+            activeVimeoPlayers--; 
+            resumeBackgroundVideo(); 
+          });
+
+        } catch (e) {
+          console.error("Error al inicializar el reproductor de Vimeo. ¿Cargó la API?", e);
+        }
+      });
+    });
   </script>
 
 </body>
-</html> 
+</html>
