@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bio- Jos Mauro Witteveen Villagómez</title>
-  <link rel="icon" type="image/png" href="Media/JOSMAURO.png">
+  <title>Jos Mauro Witteveen Villagómez</title>
+  
+  <link rel="icon" type="image/png" href="MEDIA/JOSMAURO.png">
+  
   <style>
-    /* CAMBIO 1: Tipografía Times New Roman */
+    /* Tipografía Times New Roman */
     body {
       margin: 0;
       background-color: #000000; 
@@ -23,7 +25,6 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 40px;
-      /* CAMBIO 2: Eliminada la línea del borde inferior */
       z-index: 10;
     }
 
@@ -41,29 +42,29 @@
     .social-logos img { height: 28px; width: auto; }
     .nav-left .social-logos { display: none; }
 
-    /* --- ESTILOS DEL CONTENEDOR PRINCIPAL (LAYOUT DIVIDIDO) --- */
+    /* --- ESTILOS DEL CONTENEDOR PRINCIPAL --- */
     .big-container {
       padding: 50px;
-      max-width: 1000px; /* Aumenté un poco el ancho para que quepan las dos columnas */
+      max-width: 1000px;
       margin: 0 auto;
     }
 
-    /* Contenedor flexible para dividir izquierda (formulario) y derecha (texto) */
     .split-layout {
       display: flex;
       flex-direction: row;
-      gap: 60px; /* Espacio entre columnas */
+      gap: 60px;
       align-items: flex-start;
     }
 
     /* --- COLUMNA IZQUIERDA (FORMULARIO) --- */
     .left-column {
-      flex: 1; /* Ocupa 1 parte del espacio */
+      flex: 1;
       min-width: 300px;
     }
 
+    /* CAMBIO 2: Tamaño reducido a 1.15em para consistencia con la otra página */
     .form-title {
-      font-size: 1.4em;
+      font-size: 1.15em; 
       margin-bottom: 20px;
       font-weight: normal;
       color: #fff;
@@ -93,7 +94,7 @@
       color: #ffffff;
       font-family: "Times New Roman", Times, serif;
       font-size: 1em;
-      resize: vertical; /* Permite estirar el area de texto */
+      resize: vertical;
     }
 
     input:focus, textarea:focus {
@@ -120,7 +121,7 @@
 
     /* --- COLUMNA DERECHA (TEXTO) --- */
     .right-column {
-      flex: 1.2; /* Ocupa un poco más de espacio (1.2) que el formulario */
+      flex: 1.2;
     }
 
     .text-block p {
@@ -128,7 +129,7 @@
       line-height: 1.6;
       color: #b0b0b0;
       margin: 0 0 1.5em 0;
-      text-align: justify; /* Opcional: justifica el texto */
+      text-align: justify;
     }
 
     .bio-image {
@@ -136,6 +137,15 @@
       max-width: 400px;
       margin-top: 20px;
       display: block;
+    }
+    
+    /* CAMBIO 3: Estilos del Footer */
+    .footer-copyright {
+        text-align: center;
+        padding: 60px 20px 20px;
+        font-size: 0.8em;
+        color: #666;
+        width: 100%;
     }
     
     /* --- ESTILOS RESPONSIVE PARA MÓVILES --- */
@@ -169,7 +179,7 @@
 
       /* Ajuste del Layout para Móvil */
       .split-layout {
-        flex-direction: column-reverse; /* Pone el texto arriba y el formulario abajo en celular */
+        flex-direction: column-reverse; 
         gap: 50px;
       }
       .right-column {
@@ -177,11 +187,11 @@
       }
       .left-column {
         width: 100%;
-        border-top: 1px solid #333; /* Separador visual en móvil */
+        border-top: 1px solid #333; 
         padding-top: 40px;
       }
       .bio-image {
-        width: 100%; /* Imagen full ancho en móvil */
+        width: 100%; 
         margin: 20px auto;
       }
     }
@@ -259,6 +269,10 @@
 
     </div>
   </main>
+  
+  <footer class="footer-copyright">
+      Derechos reservados Jos Mauro Witteveen Villagómez
+  </footer>
 
   <script>
     function toggleMenu() {
