@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Jos Mauro Witteveen Villagómez</title>
-  <link rel="icon" type="image/png" href="Media/JOSMAURO.png">
+  
+  <link rel="icon" type="image/png" href="MEDIA/JOSMAURO.png">
   
   <script src="https://player.vimeo.com/api/player.js"></script>
   
@@ -37,7 +38,6 @@
       z-index: -1;
     }
     
-    /* CAMBIO 1: Tipografía Times New Roman */
     body {
       margin: 0;
       background-color: transparent; 
@@ -45,7 +45,6 @@
       font-family: "Times New Roman", Times, serif; 
     }
 
-    /* CAMBIO 2: Eliminada la línea del borde inferior (border-bottom) */
     .header {
       position: relative;
       height: 64px;
@@ -54,7 +53,6 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 40px;
-      /* border-bottom: 1px solid #444;  <-- ELIMINADO */
       z-index: 10;
     }
 
@@ -72,7 +70,6 @@
     .social-logos img { height: 28px; width: auto; }
     .nav-left .social-logos { display: none; }
 
-    /* ... (Estilos de Main Container) ... */
     .big-container { padding: 50px; max-width: 1200px; margin: 0 auto; }
     .projects-container { display: flex; flex-direction: column; gap: 100px; }
 
@@ -114,11 +111,26 @@
         margin-left: calc(50% + 25% + 30px);
         padding-top: 10px;
     }
-    .project-title { font-size: 1.4em; font-weight: bold; margin: 0 0 5px 0; }
+
+    /* CAMBIO 1: Negritas más pequeñas (font-size reducido de 1.4em a 1.15em) */
+    .project-title { 
+        font-size: 1.15em; 
+        font-weight: bold; 
+        margin: 0 0 5px 0; 
+    }
+
     .project-year { font-size: 1em; color: #918e8e; margin: 0 0 15px 0; }
     .project-description { font-size: 0.95em; line-height: 1.5; color: #b0b0b0; }
     
-    /* ... (Estilos de menú hamburguesa) ... */
+    /* ESTILOS DEL FOOTER (DERECHOS RESERVADOS) */
+    .footer-copyright {
+        text-align: center;
+        padding: 60px 20px 20px; /* Un poco de espacio arriba */
+        font-size: 0.8em;
+        color: #666;
+        width: 100%;
+    }
+
     .menu-toggle { display: none; }
     .bar { display: block; width: 25px; height: 3px; background-color: #fff; margin: 5px auto; }
 
@@ -296,6 +308,10 @@
 
     </div>
   </main>
+  
+  <footer class="footer-copyright">
+      Derechos reservados Jos Mauro Witteveen Villagómez
+  </footer>
 
   <script>
     function toggleMenu() {
